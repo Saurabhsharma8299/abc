@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - Kamla Hospital</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 2rem;
+        }
+        .welcome-section {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .dashboard-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .dashboard-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .appointment-list {
+            list-style: none;
+            padding: 0;
+        }
+        .appointment-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .appointment-item:last-child {
+            border-bottom: none;
+        }
+        .status-upcoming {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        .status-completed {
+            color: #4CAF50;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+        .tab-container {
+            margin-bottom: 2rem;
+        }
+        .tab-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: #f5f5f5;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Kamla Hospital</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#" id="bookAppointmentBtn">Book Appointment</a></li>
+                <li><a href="#" id="updateProfileBtn">Update Profile</a></li>
+            </ul>
+            <a href="#" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="welcome-section">
+            <h2>Welcome, <span id="patientName">Patient</span></h2>
+            <p>Patient ID: <span id="patientId"></span></p>
+        </div>
+
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="overview">Overview</button>
+                <button class="tab-btn" data-tab="appointments">Appointments</button>
+                <button class="tab-btn" data-tab="medical">Medical History</button>
+                <button class="tab-btn" data-tab="profile">Profile</button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-calendar-check"></i> Next Appointment</h3>
+                        <div id="nextAppointment">
+                            Loading...
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-notes-medical"></i> Recent Prescriptions</h3>
+                        <div id="recentPrescriptions">
+                            Loading...
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-heartbeat"></i> Vital Statistics</h3>
+                        <div id="vitalStats">
+                            Loading...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appointments Tab -->
+            <div class="tab-content" id="appointments">
+                <div class="dashboard-card">
+                    <h3>Your Appointments</h3>
+                    <ul class="appointment-list" id="appointmentsList">
+                        Loading appointments...
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Medical History Tab -->
+            <div class="tab-content" id="medical">
+                <div class="dashboard-card">
+                    <h3>Medical History</h3>
+                    <div id="medicalHistory">
+                        Loading medical history...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Tab -->
+            <div class="tab-content" id="profile">
+                <div class="dashboard-card">
+                    <h3>Personal Information</h3>
+                    <div id="profileInfo">
+                        Loading profile information...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/patient-dashboard.js"></script>
+</body>
+</html>
